@@ -1,25 +1,24 @@
 package main
-
 import (
-	"fmt"
+	"github.com/gorilla/mux"
+	"net/http"
+	"strconv"
 )
 
-func multiplyByTo(in <-chan int, out chan<- int) {
-	num := <-in
-	result := num * 2
-	out <- result
+var contacts = make(map[int]string)
+
+func getContact(writer http.ResponseWriter, request *http.Request) {
+	v := mux.Vars(request)
+	id, _ := strconv.Atoi(v["id"])
+	writer.Write([]byte(contacts[id]))
 }
 
 func main() {
-	out := make(chan int)
-	in := make(chan int)
+	contacts[0] = "Anton"
+	contacts[1] = "Berta"
+	contacts[2] = "Ceasar"
 
-	go multiplyByTo(in, out)
-	go multiplyByTo(in, out)
-
-	in <- 1
-	in <- 2
-
-	fmt.Println(<-out)
-	fmt.Println(<-out)
+	r := mux.NewRouter()
+	r.HandleFunc("/contacts/{id}", getContact).Methods("GET")
+	http.ListenAndServe(":8080", r)
 }

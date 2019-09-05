@@ -105,6 +105,38 @@ i= 23
   * `a < b`
   * `a > b`
 
+## Formatierung
+| General | |
+|----|----|
+| %v | the value in default format |
+| %#v | Go syntax representation of the value|
+| %T | Go syntax representation of the type of the value|
+| %% | a literal percent sign; consumes no value|
+
+| Integer | |
+|----|----|
+| %b | base 2 |
+| %o | base 8 |
+| %x | base 16 |
+| %c | the char represented by the corresponding Unicode code point|
+
+|Floating Point||
+|----|----|
+| %e | scientific notation, e.g. -1.234456e+78 |
+| %f | decimal point but no exponent, e.g. 123.456 |
+
+|String and slice||
+|----|----|
+| %s | the uninterpreted bytes of the string or slice |
+| %q | the double quoted string safely escaped with go syntax |
+| %p | (Slice only) the address of the 0th element i nbase 16 notation with leading 0x 
+
+| Pointer ||
+|----|----|
+| %p | base 16 notation with leading 0x |
+
+[Documentation](https://golang.org/pkg/fmt/)
+
 ## For-Schleife
 * Go hat nur ein Schleifenkonstrukt, die for-Schleife
 * Die normale for-Schleife hat drei, durch Semikolon
@@ -540,7 +572,7 @@ import (
 
 type programmingLanguages struct {
 	name 	string 	`json:"fieldName"`
-	rating	int		`xml:"rating"`
+	rating	int     `xml:"rating"`
 	future	bool	`abc:""`
 }
 
@@ -642,7 +674,7 @@ func main() {
 IN/OUT
 ```go
 package main
-
+ 
 import "fmt"
 
 func multiplyByTo(in <-chan int, out chan<- int) {
@@ -656,7 +688,7 @@ func main() {
 	in := make(chan int)
 
 	go multiplyByTo(in, out)
-	go multiplyByTo(in, out)
+	go multiplyByTo(in, out)timo kaesbach
 
 	in <- 1
 	in <- 2
@@ -668,3 +700,148 @@ func main() {
 * Daten fließen in Richtung des Pfeils
 * `ch <- v` Send v to channel ch.
 * `v := <-ch` Receive from ch, and assign value to v.
+
+# Internet
+## Net
+```go
+package main
+import (
+    "net/http"
+    "strings"
+)
+
+func sayHello(w http.ResponseWriter, r *http.Request) {
+	message := r.URL.Path
+	message = strings.TrimPrefix(message, "/")
+	message = "Hello " + message
+	w.Write([]byte(message))
+}
+
+func main() {
+	http.HandleFunc("/", sayHello)
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		panic(err)
+	}
+}
+```
+
+```bash
+$ curl http://localhost:8080/test
+Hello test
+```
+
+## Ping Pong / Files
+```go
+package main
+import (
+    "net/http"
+)
+
+func ping(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("pong"))
+}
+
+func main() {
+	http.Handle("/", http.FileServer(http.Dir("./src")))
+	http.HandleFunc("/ping", ping)
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		panic(err)
+	}
+}
+```
+
+* Funktion akzeptiert eingehende Verbindung auf TCP-Port 8080
+* Für jede Verbindung wird eine Go Routine gestartet, die den Request an einen Request-Handler delegiert
+* Ein Request-Handler ist eine Go-Funktion mit fester Signatur
+  * `func kontakte(writer http.ResponseWriter, request *http.Request)`
+* Wichtige Felder von http.Request sind URL und Method für den Zugriff auf URL und HTTP-Methode
+  
+## Routing
+* Routing bezeichnet den Prozess der Bstimmung und Weiterleitung eingehender HTTP-Requests an einen zuständigen Request-Handler
+* Die einfachste Form des Routings ist das Registrieren von und Binden eines Requests-Handlers auf ein URL-Muster über die Funktion `http.HandleFunc`
+  * `http.HandleFunc("/kontakte", kontakte)`
+* Der Aufruf bewirkt, dass der Request der Form `http://localhost:8080/kontakte` an die Funktion `kontakte` delegiert wird
+
+## Request/Response
+* Der Request-Handler `kontakte` kombiniert die earbeitung und das Schreiben der antwort in einem Schritt
+* Die EMthode `Write` schreibt die Byte-Slice in die vom Writer repräsentierte HTTP-Verbindung
+* Der Default-Statuscode ist `200 OK` und wird implizit beim Aufruf von Write gesetzt
+
+## Unter Linux
+* Der Code kann auch so übersetzt werden:
+  * `env GOOS=linux go build main.go`
+* Das entstandene Binary kann so direkt auf Linux-Maschinen ausgeführt werden
+  * `$ ./main`
+  * `$ curl http://localhost:8080/kontakte`
+  * `Anton, Berta, Hans`
+
+## Routing mit gorilla/mux
+* `http.ListenAndServe(":8080", nil)` dient der Beantwortung von HTTP-Requests
+* Die Go.Standardbibliothek net/http enthält den Typ http.ServerMux, der das Interface http.Handler implementiert
+* Wird nil übergeben, dann wird das Routing von DefaultServerMux übernommen (dort werden alle Handler implizit registriert)
+* Besser geeignet ist das (externe) Package `gorilla/mux`, ein Multiplexer (Router)
+  * `go get -u github.com/gorilla/mux`
+
+```go
+package main
+import (
+	"github.com/gorilla/mux"
+	"net/http"
+)
+
+func kontakte(writer http.ResponseWriter, request *http.Request) {
+	writer.Write([]byte("Anton, Berta, Hans"))
+}
+
+func main() {
+	r := mux.NewRouter()
+	r.HandleFunc("/kontakte", kontakte)
+	http.ListenAndServe(":8080", r)
+}
+```
+
+## Die Idee REST
+* Die Idee bei REST ist die Identifizierung von Ressourcen über URIs
+* Die "Pflege" der Ressourcen geschieht über HTTP-Befehle
+  * `r.HandleFunc("/kontakte/{id:[0..9]+}", getContact).Methods("GET")`
+* Hier wird ein Endpunkt für einzelne Kontakte mit numerischer ID definiert
+
+```go
+package main
+import (
+	"github.com/gorilla/mux"
+	"net/http"
+	"strconv"
+)
+
+var contacts = make(map[int]string)
+
+func getContact(writer http.ResponseWriter, request *http.Request) {
+	v := mux.Vars(request)
+	id, _ := strconv.Atoi(v["id"])
+	writer.Write([]byte(contacts[id]))
+}
+
+func main() {
+	contacts[0] = "Anton"
+	contacts[1] = "Berta"
+	contacts[2] = "Ceasar"
+
+	r := mux.NewRouter()
+	r.HandleFunc("/contacts/{id}", getContact).Methods("GET")
+	http.ListenAndServe(":8080", r)
+}
+```
+
+# REST
+## CURL
+* `curl -X GET http://localhost:8080/kontakte/1`
+* `curl -X POST` 
+  * `-H "Content-Type: application/json"`
+  * `-d '{"Vorname": "Willi666", "Nachname": "Baltimore"}'`
+  * `http://localhost:8080/kontakte`
+* `curl -X DELETE http://localhost:8080/kontakte/1`
+* `curl -X PUT`
+  * `-H "Content-Type: application/json"`
+  * `-d '{"Vorname": "Peter", "Nachname": "Petersen"}'`
+  * `http://localhost:8080/kontakte/`
