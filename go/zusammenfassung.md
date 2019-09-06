@@ -1,43 +1,49 @@
 # Grundlagen
+
 ## Features
-* UTF-8
-* Keine Default Parameter
-* Kein implizites Casting
-* Kein Operator Overloading
-* Keine Exceptions
-* Keine Makros
-* keine Funktionsankündigung
+
+- UTF-8
+- Keine Default Parameter
+- Kein implizites Casting
+- Kein Operator Overloading
+- Keine Exceptions
+- Keine Makros
+- keine Funktionsankündigung
 
 ## Eigenschaften
-* Stabil / Rückwärtskompatible
-* Einfach typisiert aber nicht typenlos
-* wenig Memory Allocation
-* Structs und Arrays
-* Concurrency
-* Sprache zur Systemprogrammierung
-* Praktische Sprache
-* Relativ nah an der Hardware
-* Kontrolle wichtiger als Bequemlichkeit
-* Schnell zu übersetzen
-* beinhaltet Software-Werkzeuge
-* Gegenentwurf zu C++
+
+- Stabil / Rückwärtskompatible
+- Einfach typisiert aber nicht typenlos
+- wenig Memory Allocation
+- Structs und Arrays
+- Concurrency
+- Sprache zur Systemprogrammierung
+- Praktische Sprache
+- Relativ nah an der Hardware
+- Kontrolle wichtiger als Bequemlichkeit
+- Schnell zu übersetzen
+- beinhaltet Software-Werkzeuge
+- Gegenentwurf zu C++
 
 ## APIs und Blöcke
-* Grafik
-* Kryptographie
-* Netzwerk, verteilte Systeme
-* Unterstützung vieler File-Formate
-* Unterstützung vieler Protokolle
+
+- Grafik
+- Kryptographie
+- Netzwerk, verteilte Systeme
+- Unterstützung vieler File-Formate
+- Unterstützung vieler Protokolle
 
 ## Open Source
-* Open-Source
-* Quellcode einsehbar unter [golang.org](https://golang.org/pkg)
-* Läuft auf Unix-ähnlichen Systemen, Linux, FreeBSD, OpenBSD, MacOSX, Windows
-* In der Regel läuft der Code plattformunabhängig
 
+- Open-Source
+- Quellcode einsehbar unter [golang.org](https://golang.org/pkg)
+- Läuft auf Unix-ähnlichen Systemen, Linux, FreeBSD, OpenBSD, MacOSX, Windows
+- In der Regel läuft der Code plattformunabhängig
 
 # Structs
+
 ## "main"-Funktion
+
 ```go
 package main
 
@@ -48,9 +54,9 @@ func main() {
 }
 ```
 
-* Schlüsselwort func definiert Funktion
-* Funktion main in allen main-Paketen kann von außen aufgerufen werden (Einstiegspunkt)
-* Aufrufen der `Println` Funktion aus dem `fmt` Paket
+- Schlüsselwort func definiert Funktion
+- Funktion main in allen main-Paketen kann von außen aufgerufen werden (Einstiegspunkt)
+- Aufrufen der `Println` Funktion aus dem `fmt` Paket
 
 ```go
 package main
@@ -60,90 +66,97 @@ func main() {
     fmt.Println("i=", i)
 }
 ```
+
 ```bash
 $ go run i.go
 i= 23
 ```
-* Variablen in go sind statisch getypt
-* Gleichzeitige Deklaration mehrerer Variablen
-* `var vorname, nachname string = "Willi", "Hans"`
+
+- Variablen in go sind statisch getypt
+- Gleichzeitige Deklaration mehrerer Variablen
+- `var vorname, nachname string = "Willi", "Hans"`
 
 ## Deklaration
-* Lokale Typinferenz (Übersetzer erkennt Type automatisch)
-  * `var pi = 3.141`
-  * Kurzform lokaler Typinferenz `x, y := 42, 23` 
-* Deklaratiion ohne Initialisierung (Auf Nullwert gesetzt)
-  * `var x string`
-* Jede Variable hat einen statischen Typ
-* Muss zur Übersezung bekannt sein
+
+- Lokale Typinferenz (Übersetzer erkennt Type automatisch)
+  - `var pi = 3.141`
+  - Kurzform lokaler Typinferenz `x, y := 42, 23`
+- Deklaratiion ohne Initialisierung (Auf Nullwert gesetzt)
+  - `var x string`
+- Jede Variable hat einen statischen Typ
+- Muss zur Übersezung bekannt sein
 
 | Vorteile                 | Nachteile                             |
-|--------------------------|---------------------------------------|
+| ------------------------ | ------------------------------------- |
 | Effiezientere Ausführung | Frühe Fehlererkennung                 |
 | Schnellere Übersetzung   | In einigen Fällen mehr Notation nötig |
 | Frühere Fehlererkennung  |                                       |
 
 ## Basistypen
-* bool
-* string
-* int, int8, ..., int64
-* uint uint8, ..., uint64
-* uintprt (kann beliebig viele Zeiger enthalten)
-* byte
-* rune (alias für int32, Unicode Code Point)
-* float32, float64
-* complex64, complex128
+
+- bool
+- string
+- int, int8, ..., int64
+- uint uint8, ..., uint64
+- uintprt (kann beliebig viele Zeiger enthalten)
+- byte
+- rune (alias für int32, Unicode Code Point)
+- float32, float64
+- complex64, complex128
 
 ## Operatoren
-* Arithmetische Operatoren
-  * `-, *, +, /`
-  * `% (Modulo, Devisionsrest)`
-  * `+ (String Konkatenation)`
-* Vergleichsoperatoren
-  * `a == b`
-  * `a != b`
-  * `a < b`
-  * `a > b`
+
+- Arithmetische Operatoren
+  - `-, *, +, /`
+  - `% (Modulo, Devisionsrest)`
+  - `+ (String Konkatenation)`
+- Vergleichsoperatoren
+  - `a == b`
+  - `a != b`
+  - `a < b`
+  - `a > b`
 
 ## Formatierung
-| General | |
-|----|----|
-| %v | the value in default format |
-| %#v | Go syntax representation of the value|
-| %T | Go syntax representation of the type of the value|
-| %% | a literal percent sign; consumes no value|
 
-| Integer | |
-|----|----|
-| %b | base 2 |
-| %o | base 8 |
-| %x | base 16 |
-| %c | the char represented by the corresponding Unicode code point|
+| General |                                                   |
+| ------- | ------------------------------------------------- |
+| %v      | the value in default format                       |
+| %#v     | Go syntax representation of the value             |
+| %T      | Go syntax representation of the type of the value |
+| %%      | a literal percent sign; consumes no value         |
 
-|Floating Point||
-|----|----|
-| %e | scientific notation, e.g. -1.234456e+78 |
-| %f | decimal point but no exponent, e.g. 123.456 |
+| Integer |                                                              |
+| ------- | ------------------------------------------------------------ |
+| %b      | base 2                                                       |
+| %o      | base 8                                                       |
+| %x      | base 16                                                      |
+| %c      | the char represented by the corresponding Unicode code point |
 
-|String and slice||
-|----|----|
-| %s | the uninterpreted bytes of the string or slice |
-| %q | the double quoted string safely escaped with go syntax |
-| %p | (Slice only) the address of the 0th element i nbase 16 notation with leading 0x 
+| Floating Point |                                             |
+| -------------- | ------------------------------------------- |
+| %e             | scientific notation, e.g. -1.234456e+78     |
+| %f             | decimal point but no exponent, e.g. 123.456 |
 
-| Pointer ||
-|----|----|
-| %p | base 16 notation with leading 0x |
+| String and slice |                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------- |
+| %s               | the uninterpreted bytes of the string or slice                                  |
+| %q               | the double quoted string safely escaped with go syntax                          |
+| %p               | (Slice only) the address of the 0th element i nbase 16 notation with leading 0x |
+
+| Pointer |                                  |
+| ------- | -------------------------------- |
+| %p      | base 16 notation with leading 0x |
 
 [Documentation](https://golang.org/pkg/fmt/)
 
 ## For-Schleife
-* Go hat nur ein Schleifenkonstrukt, die for-Schleife
-* Die normale for-Schleife hat drei, durch Semikolon
-  * das **Init-Statement** wird vor der ersten Scleifeniteration ausgeführt
-  * Der **Condition-Ausdruck** wird vor jeder Iteration ausgewertet
-  * Das **Post-Statement** word am ende jeder Iteration ausgeführt
-* Die drei Statements werden **nicht** von runden Klammern eingefasst, dafür müssen {} zwingend gesetzt werden
+
+- Go hat nur ein Schleifenkonstrukt, die for-Schleife
+- Die normale for-Schleife hat drei, durch Semikolon
+  - das **Init-Statement** wird vor der ersten Scleifeniteration ausgeführt
+  - Der **Condition-Ausdruck** wird vor jeder Iteration ausgewertet
+  - Das **Post-Statement** word am ende jeder Iteration ausgeführt
+- Die drei Statements werden **nicht** von runden Klammern eingefasst, dafür müssen {} zwingend gesetzt werden
 
 ```go
 for a := 0; a < 10; a++ {
@@ -151,17 +164,16 @@ for a := 0; a < 10; a++ {
 }
 ```
 
+- Alternativform: Wiederhole, solange Bedingung wahr ist
+- Entspricht while-schleife in anderen Sprachen
 
-* Alternativform: Wiederhole, solange Bedingung wahr ist
-* Entspricht while-schleife in anderen Sprachen
-  
 ```go
 for a < b {
     a += 1
 }
 ```
 
-* Alternativform: Mit range
+- Alternativform: Mit range
 
 ```go
 a := []int{1,2,3}
@@ -176,6 +188,7 @@ index: 2, value: 3
 ```
 
 ## Funktionen
+
 ```go
 package main
 import "fmt"
@@ -190,11 +203,12 @@ func main() {
 ```
 
 Beispiel mit zwei Rückgabewerten
+
 ```go
 func swap1(x int, y int) (int, int) {
     return y, x
 }
-x, y := swap1(1,2) 
+x, y := swap1(1,2)
 // alternativ
 
 func swap2(x int, y int) (rx int, ry int) {
@@ -204,11 +218,12 @@ func swap2(x int, y int) (rx int, ry int) {
 }
 ```
 
-* Funktionen können Rückgabetyp haben
-* Mehrere rückgabewerte möglich
-* `return` beendet Funktion
+- Funktionen können Rückgabetyp haben
+- Mehrere rückgabewerte möglich
+- `return` beendet Funktion
 
 ## Kommentare
+
 ```go
 // Bis zum Ende der Zeile
 
@@ -216,6 +231,7 @@ var x /* eingebetteter Kommentar */ int
 ```
 
 ## Sonstiges
+
 ```go
 f(); g(); h()
 
@@ -226,31 +242,36 @@ h()
 ```
 
 # Details
-| Vorzüge                  | Schwächen                             |
-|--------------------------|---------------------------------------|
-| plattformübergreifen | keine generischen Typen |
-| start vereinfachte Syntax   | nur teilweise objektorientiert |
-| automatisches Speichermanagement (Garbage Collection)  | ausbaufähige Unterstützung von IDEs |
-| einheitliche Code-Formatierung | vergleichsweise spärliches Angebot an Bibliotheken und packages |
-| einfacher Importprozess | mühsamer Umstieg von klassichen, objektorientierten Sprachen ie Java und C++ |
-| mehrere Rückgabewerte für Funktionen und Methoden möglich | (erst) wenige Tutorials, Experten etc. |
-| Nebenläufigkeit |  |
-| umfangreiche Standardbibliothek (insbesondere für HTTP und Netzwerkaufgaben) |  |
+
+| Vorzüge                                                                      | Schwächen                                                                    |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| plattformübergreifen                                                         | keine generischen Typen                                                      |
+| start vereinfachte Syntax                                                    | nur teilweise objektorientiert                                               |
+| automatisches Speichermanagement (Garbage Collection)                        | ausbaufähige Unterstützung von IDEs                                          |
+| einheitliche Code-Formatierung                                               | vergleichsweise spärliches Angebot an Bibliotheken und packages              |
+| einfacher Importprozess                                                      | mühsamer Umstieg von klassichen, objektorientierten Sprachen ie Java und C++ |
+| mehrere Rückgabewerte für Funktionen und Methoden möglich                    | (erst) wenige Tutorials, Experten etc.                                       |
+| Nebenläufigkeit                                                              |                                                                              |
+| umfangreiche Standardbibliothek (insbesondere für HTTP und Netzwerkaufgaben) |                                                                              |
 
 ## Grundlagen
-* Go enstand 2007 ursprünglich bei Google, ist aber seit 2009 - weit vor Version 1.0 - ein Open-Source-Projekt auf GitHub
-* Gründungsväter sind unter anderem die Bell-Labs/Unix-/C-Berühmtheiten Rob Pike und Ken Thompson
+
+- Go enstand 2007 ursprünglich bei Google, ist aber seit 2009 - weit vor Version 1.0 - ein Open-Source-Projekt auf GitHub
+- Gründungsväter sind unter anderem die Bell-Labs/Unix-/C-Berühmtheiten Rob Pike und Ken Thompson
 
 ## Kompilieren und Ausführen
-* `$ go run hello.go`
-* Dieses Kommando kompiliert und lässt das Programm laufen
-* Für die Binary wird ein temporäres Verzeichnis erstellt und direkt wieder gelöscht
-* das Verzeichnis wrd sichtbar wenn man folgenden Befehl eingibt
-  * `go run --work hello.go`
-* Importierte aber nicht genutzte Pakete werfen Fehler
-  
+
+- `$ go run hello.go`
+- Dieses Kommando kompiliert und lässt das Programm laufen
+- Für die Binary wird ein temporäres Verzeichnis erstellt und direkt wieder gelöscht
+- das Verzeichnis wrd sichtbar wenn man folgenden Befehl eingibt
+  - `go run --work hello.go`
+- Importierte aber nicht genutzte Pakete werfen Fehler
+
 ## Pointer
+
 ohne Pointer
+
 ```go
 func setX(x int, value int) {
     x = value
@@ -265,6 +286,7 @@ func main() {
 ```
 
 mit Pointer
+
 ```go
 func setX(x *int, value int) {
     *x = value
@@ -277,6 +299,7 @@ func main() {
 }
 // Value of x is 5
 ```
+
 ```go
 var a int
 var b *int
@@ -288,9 +311,10 @@ fmt.Println(a) // 20
 ```
 
 ## struct
-* Go ist nicht objektorientiert
-* also auch keine Polymorphie oder Overloading
-* aber Go hat structs
+
+- Go ist nicht objektorientiert
+- also auch keine Polymorphie oder Overloading
+- aber Go hat structs
 
 ```go
 type Auto struct {
@@ -300,7 +324,8 @@ type Auto struct {
 ```
 
 ### struct initialisieren
-* Wie bei Variablen gibt es hier auch verschiedene Varianten
+
+- Wie bei Variablen gibt es hier auch verschiedene Varianten
 
 ```go
 audi := Auto {
@@ -317,6 +342,7 @@ audi.Power = 900
 ```
 
 ### struct mit Funktionen
+
 ```go
 package main
 
@@ -339,11 +365,13 @@ func main() {
 ```
 
 ### new
-* `audi := &Auto{}`
-* ist gleich zu
-* `audi := new(Audi)`
+
+- `audi := &Auto{}`
+- ist gleich zu
+- `audi := new(Audi)`
 
 ### struct Komposition
+
 ```go
 package main
 import "fmt"
@@ -371,6 +399,7 @@ func main() {
 ```
 
 ## Arrays
+
 ```go
 package main
 import "fmt"
@@ -397,11 +426,12 @@ func main() {
 ```
 
 ## Slices
-* Slices sind Arrays ähnlich
-* Ein Slice hat drei Kompenenten
-  * Pointer
-  * Länge
-  * Kapazität
+
+- Slices sind Arrays ähnlich
+- Ein Slice hat drei Kompenenten
+  - Pointer
+  - Länge
+  - Kapazität
 
 ```go
 package main
@@ -424,7 +454,7 @@ func main() {
     fmt.Println("append:", s)   // append: [a b c d e f]
 
     c := make([]string, len(s))
-    
+
     copy(c, s)
     fmt.Println("copy:", c)         // copy: [a b c d e f]
 
@@ -453,38 +483,43 @@ func main() {
 ```
 
 # Coole Dinge
+
 ## Go-Workspace
-* Der Go-Workspace ist ein zentrales Verzeichnis, welches über die Umgebungsvariable `GOPATH` referenziert wird
-* Unterhalb des `GOPATH` finden sich drei Unterverzeichnise
-  * `bin/`
-  * `pkg/`
-  * `src/`
-* Go-Programme werden compiliert und zu einem statischen Binary verlinkt
-* Die Idee ist eine zentrale ablage aller go-Projekte
-* Gute Idee, aber es gibt Probleme bei unterschiedlichen versionierten Packages
-* Ab 1.5 gibt es eine so genannte "Dependency-Management-Technik"
-  * und ab 1.11 gibt es die Go-Module
+
+- Der Go-Workspace ist ein zentrales Verzeichnis, welches über die Umgebungsvariable `GOPATH` referenziert wird
+- Unterhalb des `GOPATH` finden sich drei Unterverzeichnise
+  - `bin/`
+  - `pkg/`
+  - `src/`
+- Go-Programme werden compiliert und zu einem statischen Binary verlinkt
+- Die Idee ist eine zentrale ablage aller go-Projekte
+- Gute Idee, aber es gibt Probleme bei unterschiedlichen versionierten Packages
+- Ab 1.5 gibt es eine so genannte "Dependency-Management-Technik"
+  - und ab 1.11 gibt es die Go-Module
 
 ## Test der Installation
-* Erstellen Sie den Go-Workspace mit den drei genannten Unterverzeichnissen
-* Exportieren Sie das Verzeichnis in der Umgebungsvariable `GOPATH`
-* `$ cd $HOME`
-* `$ mkdir -p go/bin go/pkg go/src`
-* `$ export GOPATH=$HOME/go`
-* Danach können Sie in dem `src` Verzeichnis z.B. ein "Hello World" ablegen
+
+- Erstellen Sie den Go-Workspace mit den drei genannten Unterverzeichnissen
+- Exportieren Sie das Verzeichnis in der Umgebungsvariable `GOPATH`
+- `$ cd $HOME`
+- `$ mkdir -p go/bin go/pkg go/src`
+- `$ export GOPATH=$HOME/go`
+- Danach können Sie in dem `src` Verzeichnis z.B. ein "Hello World" ablegen
 
 ## struktur eines Go-Programms
-* Der Suffix der Quelldatei ist .go
-* Sechs Schlüsselworte charakterisieren ein Go-Programm
-  * package
-  * import
-  * var
-  * const
-  * type
-  * func
-* packages sind wichtig, da sie die Funktion von Namesräumen übernehmen
+
+- Der Suffix der Quelldatei ist .go
+- Sechs Schlüsselworte charakterisieren ein Go-Programm
+  - package
+  - import
+  - var
+  - const
+  - type
+  - func
+- packages sind wichtig, da sie die Funktion von Namesräumen übernehmen
 
 ## Variadische Funktionen
+
 ```go
 func summe(s ...float64) float64 {
     sum := 0.0
@@ -500,15 +535,16 @@ func main() {
 }
 ```
 
-* Funktionen können eine variable Anzahl von Parametern haben, wobei diese vom gleichen Typ sein müssen
-* Innerhalb der Funktion sind die Werte in einem Slice verfügbar
-* Auch kann ein Slice genutzt werden, um Parameter an eine Funktion mit variadischer Parameterliste zu übergeben
+- Funktionen können eine variable Anzahl von Parametern haben, wobei diese vom gleichen Typ sein müssen
+- Innerhalb der Funktion sind die Werte in einem Slice verfügbar
+- Auch kann ein Slice genutzt werden, um Parameter an eine Funktion mit variadischer Parameterliste zu übergeben
 
 ## Maps
-* Eine Map ist ein assoziatives Array
-* Bei der Definition einer Map werden Schlüssel und Wertetyp angegeben
-* Für den schlüsseltyp muss es dabei eine Vergleichsfunktion (= bzw. !=) geben, damit entschieden werden kann, ob ein Schlüssel bereits vorhanden ist oder nicht
-* Die eingebaute Funktion range() kann genutzt werden, um über alle Elemente einer Map zu iterieren (auch gültig für Arrays, Slices oder String)
+
+- Eine Map ist ein assoziatives Array
+- Bei der Definition einer Map werden Schlüssel und Wertetyp angegeben
+- Für den schlüsseltyp muss es dabei eine Vergleichsfunktion (= bzw. !=) geben, damit entschieden werden kann, ob ein Schlüssel bereits vorhanden ist oder nicht
+- Die eingebaute Funktion range() kann genutzt werden, um über alle Elemente einer Map zu iterieren (auch gültig für Arrays, Slices oder String)
 
 ```go
 commits := map[string]int{
@@ -532,6 +568,7 @@ adg 912
 ```
 
 ## Maps mit Funktionen
+
 ```go
 package main
 import "fmt"
@@ -557,11 +594,12 @@ func mult(a float64, b float64) float64 {
 ```
 
 ## OR-Mapping
-* Es gibt einen Medienbruch zwischen objektorientierter Programmierung und relationalen Datenbanken (object-relational impedance mismatch)
-* Objektrelationale Abbildung (engl. object-relational mapping, ORM) kann seine Objekte in einer relationalen Datenbank ablegen
-* Dem Programm erscheint die DB dann als objektorientierte DB
-* Objektorientierte Programmiersprachen (OOP) kapseln Daten und Verhalten in Objekten, hingegen legen relationale datenbanken Daten in Tabellen ab
-* Beide Paradigmen sind gurndlegend verschieden
+
+- Es gibt einen Medienbruch zwischen objektorientierter Programmierung und relationalen Datenbanken (object-relational impedance mismatch)
+- Objektrelationale Abbildung (engl. object-relational mapping, ORM) kann seine Objekte in einer relationalen Datenbank ablegen
+- Dem Programm erscheint die DB dann als objektorientierte DB
+- Objektorientierte Programmiersprachen (OOP) kapseln Daten und Verhalten in Objekten, hingegen legen relationale datenbanken Daten in Tabellen ab
+- Beide Paradigmen sind gurndlegend verschieden
 
 ```go
 package main
@@ -593,6 +631,7 @@ func main() {
 ```
 
 ## Interfaces
+
 ```
 project structure
 
@@ -604,12 +643,13 @@ myproject/
     └── circus.go
 
 ```
+
 ```go
 package animals
 
 type Dog struct{}
- 
-func (a Dog) Speaks() string { 
+
+func (a Dog) Speaks() string {
 	return "woof"
 }
 
@@ -643,12 +683,13 @@ func main() {
 }
 ```
 
-* Das Interface da definieren wo man es braucht
-* Reduziert die Abhängikeit von Komponenten des package `animal`
-* So entsteht robuste Software
-* [golang-interfaces](https://blog.chewxy.com/2018/03/18/golang-interfaces/)
+- Das Interface da definieren wo man es braucht
+- Reduziert die Abhängikeit von Komponenten des package `animal`
+- So entsteht robuste Software
+- [golang-interfaces](https://blog.chewxy.com/2018/03/18/golang-interfaces/)
 
 ## Channel
+
 ```go
 package main
 
@@ -672,9 +713,10 @@ func main() {
 ```
 
 IN/OUT
+
 ```go
 package main
- 
+
 import "fmt"
 
 func multiplyByTo(in <-chan int, out chan<- int) {
@@ -697,12 +739,15 @@ func main() {
 	fmt.Println(<-out) // 4
 }
 ```
-* Daten fließen in Richtung des Pfeils
-* `ch <- v` Send v to channel ch.
-* `v := <-ch` Receive from ch, and assign value to v.
+
+- Daten fließen in Richtung des Pfeils
+- `ch <- v` Send v to channel ch.
+- `v := <-ch` Receive from ch, and assign value to v.
 
 # Internet
+
 ## Net
+
 ```go
 package main
 import (
@@ -731,6 +776,7 @@ Hello test
 ```
 
 ## Ping Pong / Files
+
 ```go
 package main
 import (
@@ -750,37 +796,41 @@ func main() {
 }
 ```
 
-* Funktion akzeptiert eingehende Verbindung auf TCP-Port 8080
-* Für jede Verbindung wird eine Go Routine gestartet, die den Request an einen Request-Handler delegiert
-* Ein Request-Handler ist eine Go-Funktion mit fester Signatur
-  * `func kontakte(writer http.ResponseWriter, request *http.Request)`
-* Wichtige Felder von http.Request sind URL und Method für den Zugriff auf URL und HTTP-Methode
-  
+- Funktion akzeptiert eingehende Verbindung auf TCP-Port 8080
+- Für jede Verbindung wird eine Go Routine gestartet, die den Request an einen Request-Handler delegiert
+- Ein Request-Handler ist eine Go-Funktion mit fester Signatur
+  - `func kontakte(writer http.ResponseWriter, request *http.Request)`
+- Wichtige Felder von http.Request sind URL und Method für den Zugriff auf URL und HTTP-Methode
+
 ## Routing
-* Routing bezeichnet den Prozess der Bstimmung und Weiterleitung eingehender HTTP-Requests an einen zuständigen Request-Handler
-* Die einfachste Form des Routings ist das Registrieren von und Binden eines Requests-Handlers auf ein URL-Muster über die Funktion `http.HandleFunc`
-  * `http.HandleFunc("/kontakte", kontakte)`
-* Der Aufruf bewirkt, dass der Request der Form `http://localhost:8080/kontakte` an die Funktion `kontakte` delegiert wird
+
+- Routing bezeichnet den Prozess der Bstimmung und Weiterleitung eingehender HTTP-Requests an einen zuständigen Request-Handler
+- Die einfachste Form des Routings ist das Registrieren von und Binden eines Requests-Handlers auf ein URL-Muster über die Funktion `http.HandleFunc`
+  - `http.HandleFunc("/kontakte", kontakte)`
+- Der Aufruf bewirkt, dass der Request der Form `http://localhost:8080/kontakte` an die Funktion `kontakte` delegiert wird
 
 ## Request/Response
-* Der Request-Handler `kontakte` kombiniert die earbeitung und das Schreiben der antwort in einem Schritt
-* Die EMthode `Write` schreibt die Byte-Slice in die vom Writer repräsentierte HTTP-Verbindung
-* Der Default-Statuscode ist `200 OK` und wird implizit beim Aufruf von Write gesetzt
+
+- Der Request-Handler `kontakte` kombiniert die earbeitung und das Schreiben der antwort in einem Schritt
+- Die EMthode `Write` schreibt die Byte-Slice in die vom Writer repräsentierte HTTP-Verbindung
+- Der Default-Statuscode ist `200 OK` und wird implizit beim Aufruf von Write gesetzt
 
 ## Unter Linux
-* Der Code kann auch so übersetzt werden:
-  * `env GOOS=linux go build main.go`
-* Das entstandene Binary kann so direkt auf Linux-Maschinen ausgeführt werden
-  * `$ ./main`
-  * `$ curl http://localhost:8080/kontakte`
-  * `Anton, Berta, Hans`
+
+- Der Code kann auch so übersetzt werden:
+  - `env GOOS=linux go build main.go`
+- Das entstandene Binary kann so direkt auf Linux-Maschinen ausgeführt werden
+  - `$ ./main`
+  - `$ curl http://localhost:8080/kontakte`
+  - `Anton, Berta, Hans`
 
 ## Routing mit gorilla/mux
-* `http.ListenAndServe(":8080", nil)` dient der Beantwortung von HTTP-Requests
-* Die Go.Standardbibliothek net/http enthält den Typ http.ServerMux, der das Interface http.Handler implementiert
-* Wird nil übergeben, dann wird das Routing von DefaultServerMux übernommen (dort werden alle Handler implizit registriert)
-* Besser geeignet ist das (externe) Package `gorilla/mux`, ein Multiplexer (Router)
-  * `go get -u github.com/gorilla/mux`
+
+- `http.ListenAndServe(":8080", nil)` dient der Beantwortung von HTTP-Requests
+- Die Go.Standardbibliothek net/http enthält den Typ http.ServerMux, der das Interface http.Handler implementiert
+- Wird nil übergeben, dann wird das Routing von DefaultServerMux übernommen (dort werden alle Handler implizit registriert)
+- Besser geeignet ist das (externe) Package `gorilla/mux`, ein Multiplexer (Router)
+  - `go get -u github.com/gorilla/mux`
 
 ```go
 package main
@@ -801,10 +851,11 @@ func main() {
 ```
 
 ## Die Idee REST
-* Die Idee bei REST ist die Identifizierung von Ressourcen über URIs
-* Die "Pflege" der Ressourcen geschieht über HTTP-Befehle
-  * `r.HandleFunc("/kontakte/{id:[0..9]+}", getContact).Methods("GET")`
-* Hier wird ein Endpunkt für einzelne Kontakte mit numerischer ID definiert
+
+- Die Idee bei REST ist die Identifizierung von Ressourcen über URIs
+- Die "Pflege" der Ressourcen geschieht über HTTP-Befehle
+  - `r.HandleFunc("/kontakte/{id:[0..9]+}", getContact).Methods("GET")`
+- Hier wird ein Endpunkt für einzelne Kontakte mit numerischer ID definiert
 
 ```go
 package main
@@ -834,14 +885,16 @@ func main() {
 ```
 
 # REST
+
 ## CURL
-* `curl -X GET http://localhost:8080/kontakte/1`
-* `curl -X POST` 
-  * `-H "Content-Type: application/json"`
-  * `-d '{"Vorname": "Willi666", "Nachname": "Baltimore"}'`
-  * `http://localhost:8080/kontakte`
-* `curl -X DELETE http://localhost:8080/kontakte/1`
-* `curl -X PUT`
-  * `-H "Content-Type: application/json"`
-  * `-d '{"Vorname": "Peter", "Nachname": "Petersen"}'`
-  * `http://localhost:8080/kontakte/`
+
+- `curl -X GET http://localhost:8080/kontakte/1`
+- `curl -X POST`
+  - `-H "Content-Type: application/json"`
+  - `-d '{"Vorname": "Willi666", "Nachname": "Baltimore"}'`
+  - `http://localhost:8080/kontakte`
+- `curl -X DELETE http://localhost:8080/kontakte/1`
+- `curl -X PUT`
+  - `-H "Content-Type: application/json"`
+  - `-d '{"Vorname": "Peter", "Nachname": "Petersen"}'`
+  - `http://localhost:8080/kontakte/`
