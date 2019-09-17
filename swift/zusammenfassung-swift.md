@@ -6,7 +6,7 @@ Swift Projekt besteht aus
 
 ## Standard Library
 
-- Datentypen, Protoklle und Funktionen
+- Datentypen, Protokolle und Funktionen
 - Int, Double, ...
 - Arrays, Dictionaries, zusammen mit Protokollen und Algorithmen
 - Character, Strings und Low Level Primitives
@@ -113,7 +113,7 @@ var textVar = "Hallo
 
 - Variablennamen können aus (fast) allen Unicode-Zeichen bestehen
 - Ziffern sind erlaubt wenn die Ziffer nicht das erste Zeichen des Names ist
-- Einige SOnderzeichen sind (\$) sind nur als erstes Zeichen verboten
+- Einige Sonderzeichen sind (\$) nur als erstes Zeichen verboten
 - Leerzeichen, Rechenzeichen und Satzzeichen sind verboten
 - Variablen sollen mit einem kleinbuchstaben beginnen
 - zusammengesetzte Variablennamen mit CamelCase-Notation
@@ -122,7 +122,7 @@ var textVar = "Hallo
 var wert = 123      // zulässig
 var ein Wert = 123  // unzulässiges Zeichen
 var ein_Wert = 123  // zulässig
-var Zähler = 123    // zulässig
+var Zähler = 123    // zulässig
 var μ = 1.23        // zulässig
 var zähler1 = 123   // zulässig
 var 1wert = 123     // unzulässig (Ziffer am Anfang)
@@ -134,7 +134,7 @@ var h=0.0, w=0.0    // zulässige Mehrfachzuweisung
 
 ### Konstanten
 
-- Für Kosntanten gelten weitestgehend ide gleichen Regeln wie für Variablen
+- Für Konstanten gelten weitestgehend die gleichen Regeln wie für Variablen
 - Konstanten werden mit dem Schlüsselwort `let` definiert
 - Konstantent müssen **nicht** bei der Definition initialisiert werden
 - Eine Wertänderung nach der Initialisierung ist naturgemäß nicht möglich
@@ -167,7 +167,7 @@ let w,h: Double
 ### String und Character
 
 - Character speichert einzelne Unicode-Zeichen
-- String speichert veränderliche Zeichenketten bestehnt aus einzelnen Zeichen
+- String speichert veränderliche Zeichenketten bestehend aus einzelnen Zeichen
 - Character und String werden durch doppelte Anführungszeichen gekennzeichnet
 - Swift verwendet als Default, auch für einzelne Zeichen, den Typ String
 - Character und String sind "Value Types" und werden systemintern als struct realisiert
@@ -290,8 +290,8 @@ kegelParameter.hoehe // 5
 
 # Funktionen
 
-- Jede Funktion wird durch den Funktionsnamen und ie Typen der Übergabeparamter und der Rückgabeparameter eindeutig identifiziert
-- Funktionen sind ein "first class type, d.h. dass Funktionen auch als Funktionsparameter und Rückgabewerte verwendet werden
+- Jede Funktion wird durch den Funktionsnamen und die Typen der Übergabe- und Rückgabeparameter eindeutig identifiziert
+- Funktionen sind ein "first class type", d.h. dass Funktionen auch als Funktionsparameter und Rückgabewerte verwendet werden
 - Beim Funktionsaufruf müssen für alle Parameter die entsprechenden Namen angegeben werden, auch in der gleichen Reihenfolge
 
 ```swift
@@ -339,7 +339,7 @@ tauscheInteger(&a, &b)
 
 - Wenn eine Funktion keinen Rückgabewert hat kann die Angabe komplett ausgelassen werden
 - Wenn ein Rückgabewert verwendet werden soll, dann muss der Typ der Rückgabe exakt angegeben werden
-- Mehrere Rückgabeweerte sind durch die Verwendung von Tupeln möglich
+- Mehrere Rückgabewerte sind durch die Verwendung von Tupeln möglich
 - Auch komplexere Datentypen (Arrays, Objekte, Strukturen usw) sind erlaubt
 - Die aufrufende Stelle darf den Rückgabetyp einer Funktion ignorieren **wenn der Aufruf eindeutig ist**
 - Funktionen können überladen werden
@@ -363,7 +363,7 @@ var iField : [Int] = Array()
 Erzeugen eines arrays aus Werten
 
 ```swift
-var iPrim = [2, 3, 4, 5]
+var iPrim = [2, 3, 5, 7]
 let ampelFarben = ["Rot", "Gelb", "Grün"]
 ```
 
@@ -377,7 +377,7 @@ var pi = Array(repeating: 3.14, count: 1000)
 ## Verwendung von Arrays
 
 - Zugriff auf Elemente
-  - `let drittePrimZahl = iPrim[2]
+  - `let drittePrimZahl = iPrim[2]`
 - Element am Ende anhängen
   - `iPrim.append(29)`
 - Array mit 2 Elementen anhängen
@@ -400,11 +400,11 @@ for i in 1..<10 {
 ```
 
 - Geschlossener Bereich
-  - `for i in 10..100` Werte von 10 - 100
+  - `for i in 10...100` Werte von 10 - 100
 - Halboffener Bereich
   - `for i in 5..<20` Werte von 5 - 19
-- Laufvariable i muss nicht ausdrücklich mit var initialisiert werden
-- Wird die LAufvariable nicht benötigt kann stattdessen ein Unterstrich angegeben werden
+- Laufvariable i muss nicht ausdrücklich mit `var` initialisiert werden
+- Wird die Laufvariable nicht benötigt kann stattdessen ein Unterstrich angegeben werden
   - `for _ in 1..<10 { ... }`
 - Durchlaufen aller Elemente eines Arrays/Dictionaries
 
@@ -459,7 +459,7 @@ repeat {
 # Verschachtelte Funktionen
 
 - Verschachtelte Funktionen können zur besseren Strukturierung von langem oder unübersichtlichen Code verwendet werden
-- Verschachtelte Funktionen dürfen auf die in de umgebenen Funktion definierten Variablen zugreifen
+- Verschachtelte Funktionen dürfen auf die in der umgebenen Funktion definierten Variablen zugreifen
 - Eine verschachtelte Funktion darf direkt nur innerhalb der umgebenen Funktion aufgerufen werden
 - Verschachtelte Funktionen können als Rückgabewert der umgebenden Funktion zurückgeben und aufgerufen werden
 
@@ -491,8 +491,8 @@ var resultat = vergleich(123, 456)
 
 - Auch anonyme Funktion oder Lambda-Ausdruck genannt
 - Wird nicht über ihren Namen, sondern nur über Verweise angesprochen
-- Kann auf Informationen zugreifen, die sich in dem KOntext befinden in dem die Closure erstellt wurde
-- `{ (Parameter) -> Rückgabetyp in Code`
+- Kann auf Informationen zugreifen, die sich in dem Kontext befinden in dem die Closure erstellt wurde
+  - `{ (Parameter) -> Rückgabetyp in Code`
   - `{ (x: Int) -> Int in return x + 1}`
 - Bei Funktionen die nur aus einer Anweisung bestehen darf das Schlüsselwort `return` weggelassen werden
 - Der (oder die) Typen der Übergabeparameter dürfen, wenn die Typen aus dem Kontext erkennbar sind, ebenfalls entfallen
@@ -792,28 +792,36 @@ protocol MeinProtokoll {
   - ...
 
 ```swift
-struct Geschwindigkeit : CustomStringConvertible {
-    var description: String { return "Die Geschwindigkeit ist \(kmh) Km/h" }
-    var speed: Double = 0
-    var kmh: Double {
-        get { return speed * 3.6 }
-        set { speed = newValue / 3.6 }
+struct Auto: Vehicle {
+    init(name: String, kwh: Int) {
+        self.name = name
+        self.kwh = kwh
     }
-    var mph: Double {
-        get { return speed * 2.237 }
-        set { speed = newValue / 2.237 }
+
+    var name: String
+    var kwh: Int
+
+    var horsepower : Int {
+        get { return Int((Double(self.kwh) * 1.35962).rounded()) }
     }
 }
 
-var v0 = Geschwindigkeit()
-v0.mph = 100.0
-print(v0.kmh)
-print(v0)
+protocol Vehicle {
+    var horsepower: Int { get }
+}
+
+func printHorsepower(v: Vehicle) {
+    print(v.horsepower)
+}
+
+var audi = Auto(name: "Audi", kwh: 10)
+print(audi.horsepower)
+printHorsepower(v: audi)
 ```
 
 # Generics
 
-- Mit Generics können unnötige Wiederholugen im COde verhindert wrden
+- Mit Generics können unnötige Wiederholugen im Code verhindert werden
 - An der Stelle des Datentyps wird bei Generics ein Platzhalter eingesetzt
 
 ```swift
@@ -855,8 +863,8 @@ printToConsole(i: "Hallo")
 - In Abhängigkeit von der vorliegenden SizeClass können die Layouteigenschaften einer App angepasst werden
 - Anpassung von Abständen, Ausrichtung und Abmessung von Objekten
 - Anpassung von Farbe, Schriften und Sichtbarkeit
-- Über eine beim Wechseln der SizeClass ausgeführten MEthode (`traitCollectionDidChange`) können beliebige Anpassugnen vorgenommen werden
-- Anpassugen im Storyboard über den Button _Vary for Traits_ oder Einzelanpassugen über `+` in den Eigenschaftsdialogen
+- Über eine beim Wechseln der SizeClass ausgeführten Methode (`traitCollectionDidChange`) können beliebige Anpassugnen vorgenommen werden
+- Anpassungen im Storyboard über den Button _Vary for Traits_ oder Einzelanpassugen über `+` in den Eigenschaftsdialogen
 - **Empfohlene Vorgensweise**
   - Zuert werden Layoutregeln für den Normalfall Any/Any festgelegt
   - Danach werden Regeln für Sonderfälle ergänzt
@@ -864,9 +872,8 @@ printToConsole(i: "Hallo")
 ## Multi-View Apps
 
 - Die Transition zwischen den Views erfolgt unter Kontrolle der App
-- Für den Datenaustasuch zwischen verschiedenen Views sind spezielle Methoden vorgegeben
+- Für den Datenaustausch zwischen verschiedenen Views sind spezielle Methoden vorgegeben
 - Für die Verwendung dieser Daten ist ein grundlegendes Verständnis des Lebenszyklus einer View erforderlich
-- Der
 
 ### Hinweg
 

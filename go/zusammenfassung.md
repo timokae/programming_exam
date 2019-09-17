@@ -12,7 +12,7 @@
 
 ## Eigenschaften
 
-- Stabil / Rückwärtskompatible
+- Stabil / Rückwärtskompatibel
 - Einfach typisiert aber nicht typenlos
 - wenig Memory Allocation
 - Structs und Arrays
@@ -84,7 +84,7 @@ i= 23
 - Deklaratiion ohne Initialisierung (Auf Nullwert gesetzt)
   - `var x string`
 - Jede Variable hat einen statischen Typ
-- Muss zur Übersezung bekannt sein
+- Muss zur Übersetzung bekannt sein
 
 | Vorteile                 | Nachteile                             |
 | ------------------------ | ------------------------------------- |
@@ -108,7 +108,7 @@ i= 23
 
 - Arithmetische Operatoren
   - `-, *, +, /`
-  - `% (Modulo, Devisionsrest)`
+  - `% (Modulo, Divisionsrest)`
   - `+ (String Konkatenation)`
 - Vergleichsoperatoren
   - `a == b`
@@ -127,6 +127,7 @@ i= 23
 
 | Integer |                                                              |
 | ------- | ------------------------------------------------------------ |
+| %d      | dezimal                                                      |
 | %b      | base 2                                                       |
 | %o      | base 8                                                       |
 | %x      | base 16                                                      |
@@ -153,9 +154,9 @@ i= 23
 
 - Go hat nur ein Schleifenkonstrukt, die for-Schleife
 - Die normale for-Schleife hat drei, durch Semikolon
-  - das **Init-Statement** wird vor der ersten Scleifeniteration ausgeführt
+  - das **Init-Statement** wird vor der ersten Schleifeniteration ausgeführt
   - Der **Condition-Ausdruck** wird vor jeder Iteration ausgewertet
-  - Das **Post-Statement** word am ende jeder Iteration ausgeführt
+  - Das **Post-Statement** wird am Ende jeder Iteration ausgeführt
 - Die drei Statements werden **nicht** von runden Klammern eingefasst, dafür müssen {} zwingend gesetzt werden
 
 ```go
@@ -219,7 +220,7 @@ func swap2(x int, y int) (rx int, ry int) {
 ```
 
 - Funktionen können Rückgabetyp haben
-- Mehrere rückgabewerte möglich
+- Mehrere Rückgabewerte möglich
 - `return` beendet Funktion
 
 ## Kommentare
@@ -243,16 +244,16 @@ h()
 
 # Details
 
-| Vorzüge                                                                      | Schwächen                                                                    |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| plattformübergreifen                                                         | keine generischen Typen                                                      |
-| start vereinfachte Syntax                                                    | nur teilweise objektorientiert                                               |
-| automatisches Speichermanagement (Garbage Collection)                        | ausbaufähige Unterstützung von IDEs                                          |
-| einheitliche Code-Formatierung                                               | vergleichsweise spärliches Angebot an Bibliotheken und packages              |
-| einfacher Importprozess                                                      | mühsamer Umstieg von klassichen, objektorientierten Sprachen ie Java und C++ |
-| mehrere Rückgabewerte für Funktionen und Methoden möglich                    | (erst) wenige Tutorials, Experten etc.                                       |
-| Nebenläufigkeit                                                              |                                                                              |
-| umfangreiche Standardbibliothek (insbesondere für HTTP und Netzwerkaufgaben) |                                                                              |
+| Vorzüge                                                                      | Schwächen                                                                     |
+| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| plattformübergreifen                                                         | keine generischen Typen                                                       |
+| start vereinfachte Syntax                                                    | nur teilweise objektorientiert                                                |
+| automatisches Speichermanagement (Garbage Collection)                        | ausbaufähige Unterstützung von IDEs                                           |
+| einheitliche Code-Formatierung                                               | vergleichsweise spärliches Angebot an Bibliotheken und packages               |
+| einfacher Importprozess                                                      | mühsamer Umstieg von klassichen, objektorientierten Sprachen wie Java und C++ |
+| mehrere Rückgabewerte für Funktionen und Methoden möglich                    | (erst) wenige Tutorials, Experten etc.                                        |
+| Nebenläufigkeit                                                              |                                                                               |
+| umfangreiche Standardbibliothek (insbesondere für HTTP und Netzwerkaufgaben) |                                                                               |
 
 ## Grundlagen
 
@@ -264,7 +265,7 @@ h()
 - `$ go run hello.go`
 - Dieses Kommando kompiliert und lässt das Programm laufen
 - Für die Binary wird ein temporäres Verzeichnis erstellt und direkt wieder gelöscht
-- das Verzeichnis wrd sichtbar wenn man folgenden Befehl eingibt
+- das Verzeichnis wird sichtbar wenn man folgenden Befehl eingibt
   - `go run --work hello.go`
 - Importierte aber nicht genutzte Pakete werfen Fehler
 
@@ -337,7 +338,7 @@ audi := Auto {
 audi := Auto{}
 
 // oder
-audi := auto{name: "Audi Quattro"}
+audi := Auto{name: "Audi Quattro"}
 audi.Power = 900
 ```
 
@@ -492,7 +493,7 @@ func main() {
   - `pkg/`
   - `src/`
 - Go-Programme werden compiliert und zu einem statischen Binary verlinkt
-- Die Idee ist eine zentrale ablage aller go-Projekte
+- Die Idee ist eine zentrale ablage aller Go-Projekte
 - Gute Idee, aber es gibt Probleme bei unterschiedlichen versionierten Packages
 - Ab 1.5 gibt es eine so genannte "Dependency-Management-Technik"
   - und ab 1.11 gibt es die Go-Module
@@ -543,10 +544,15 @@ func main() {
 
 - Eine Map ist ein assoziatives Array
 - Bei der Definition einer Map werden Schlüssel und Wertetyp angegeben
-- Für den schlüsseltyp muss es dabei eine Vergleichsfunktion (= bzw. !=) geben, damit entschieden werden kann, ob ein Schlüssel bereits vorhanden ist oder nicht
+- Für den Schlüsseltyp muss es dabei eine Vergleichsfunktion (= bzw. !=) geben, damit entschieden werden kann, ob ein Schlüssel bereits vorhanden ist oder nicht
 - Die eingebaute Funktion range() kann genutzt werden, um über alle Elemente einer Map zu iterieren (auch gültig für Arrays, Slices oder String)
 
 ```go
+type Contact struct {
+    name string
+}
+var contactMap = make(map[int]Contact)
+
 commits := map[string]int{
     "rsc": 3711,
     "r":   2138,
@@ -599,7 +605,7 @@ func mult(a float64, b float64) float64 {
 - Objektrelationale Abbildung (engl. object-relational mapping, ORM) kann seine Objekte in einer relationalen Datenbank ablegen
 - Dem Programm erscheint die DB dann als objektorientierte DB
 - Objektorientierte Programmiersprachen (OOP) kapseln Daten und Verhalten in Objekten, hingegen legen relationale datenbanken Daten in Tabellen ab
-- Beide Paradigmen sind gurndlegend verschieden
+- Beide Paradigmen sind grundlegend verschieden
 
 ```go
 package main
@@ -804,7 +810,7 @@ func main() {
 
 ## Routing
 
-- Routing bezeichnet den Prozess der Bstimmung und Weiterleitung eingehender HTTP-Requests an einen zuständigen Request-Handler
+- Routing bezeichnet den Prozess der Bestimmung und Weiterleitung eingehender HTTP-Requests an einen zuständigen Request-Handler
 - Die einfachste Form des Routings ist das Registrieren von und Binden eines Requests-Handlers auf ein URL-Muster über die Funktion `http.HandleFunc`
   - `http.HandleFunc("/kontakte", kontakte)`
 - Der Aufruf bewirkt, dass der Request der Form `http://localhost:8080/kontakte` an die Funktion `kontakte` delegiert wird
@@ -812,7 +818,7 @@ func main() {
 ## Request/Response
 
 - Der Request-Handler `kontakte` kombiniert die earbeitung und das Schreiben der antwort in einem Schritt
-- Die EMthode `Write` schreibt die Byte-Slice in die vom Writer repräsentierte HTTP-Verbindung
+- Die Methode `Write` schreibt die Byte-Slice in die vom Writer repräsentierte HTTP-Verbindung
 - Der Default-Statuscode ist `200 OK` und wird implizit beim Aufruf von Write gesetzt
 
 ## Unter Linux
